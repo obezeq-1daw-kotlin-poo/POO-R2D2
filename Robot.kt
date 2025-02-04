@@ -2,7 +2,7 @@ class Robot(nombre: String) {
     val nombre: String
     var posX: Int = 0
     var posY: Int = 0
-    var direccion: Direccion = Direccion.POSITIVE_Y
+    var direccion: Direction = Direction.POSITIVE_Y
 
     init {
         require(nombre.isNotBlank()) { "El nombre no puede estar vacío" }
@@ -13,10 +13,10 @@ class Robot(nombre: String) {
 
         for (paso in pasos) {
             when (direccion) {
-                Direccion.POSITIVE_Y -> posY += paso
-                Direccion.POSITIVE_X -> posX += paso
-                Direccion.NEGATIVE_Y -> posY -= paso
-                Direccion.NEGATIVE_X -> posX -= paso
+                Direction.POSITIVE_Y -> posY += paso
+                Direction.POSITIVE_X -> posX += paso
+                Direction.NEGATIVE_Y -> posY -= paso
+                Direction.NEGATIVE_X -> posX -= paso
             }
         }
 
@@ -24,6 +24,11 @@ class Robot(nombre: String) {
     }
 
     override fun toString(): String {
-        return "$nombre está en ($posX, $posY) $direccion"
+        return """
+            Direction ($posX, $posY)
+            ~> X = $posX
+            ~> Y = $posY
+            ─────────────────────────────────
+        """.trimIndent()
     }
 }
